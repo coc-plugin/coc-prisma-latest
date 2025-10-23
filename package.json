@@ -5,7 +5,7 @@
   "author": "chuyanlong <a1008611abcd@126.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ChuYanLon/coc-prisma-latest.git"
+    "url": "git+https://github.com/coc-plugin/coc-prisma-latest.git"
   },
   "license": "MIT",
   "main": "lib/index.js",
