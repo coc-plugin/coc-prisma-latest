@@ -4,7 +4,7 @@ Coc extension that implements Prisma Language Server. Use it alongside with the 
 
 ## Install
 
-`:CocInstall @chuyanlong/coc-prisma`
+`:CocInstall coc-prisma-latest`
 
 
 ## Screenshots
