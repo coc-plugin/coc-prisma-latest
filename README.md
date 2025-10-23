@@ -1,7 +1,5 @@
 # coc-prisma
 
-Coc extension that implements Prisma Language Server. Use it alongside with the Prisma syntax plugin: https://github.com/ChuYanLon/coc-prisma-latest
-
 ## Install
 
 `:CocInstall coc-prisma-latest`
