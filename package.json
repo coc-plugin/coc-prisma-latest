@@ -1,0 +1,59 @@
+{
+  "name": "@chuyanlong/coc-prisma",
+  "version": "0.0.1",
+  "description": "Coc extension that implements Prisma Language Server",
+  "author": "chuyanlong <a1008611abcd@126.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ChuYanLon/coc-prisma-latest"
+  },
+  "license": "MIT",
+  "main": "lib/index.js",
+  "keywords": [
+    "coc.nvim"
+  ],
+  "engines": {
+    "coc": "^0.0.82"
+  },
+  "scripts": {
+    "clean": "rimraf lib",
+    "watch": "npm run dev -- -w",
+    "build": "tsc",
+    "prepare": "npm-run-all clean build"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "coc.nvim": "0.0.82",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^6.0.1",
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.9.2"
+  },
+  "activationEvents": [
+    "onLanguage:prisma"
+  ],
+  "dependencies": {
+    "@prisma/language-server": "^6.17.1"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "coc-prisma.restartLanguageServer",
+        "title": "Restart Prisma Language Server",
+        "category": "Prisma"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Prisma language server configuration",
+      "properties": {
+        "prisma.prismaFmtBinPath": {
+          "scope": "resource",
+          "type": "string",
+          "default": "",
+          "description": "Option to set the path to the prisma-fmt binary."
+        }
+      }
+    }
+  }
+}
