@@ -8,27 +8,20 @@ import {
   LanguageClientOptions,
   commands,
   window,
-} from "coc.nvim";
+  services,
+} from 'coc.nvim';
 
-function createLanguageServer(
-  serverOptions: ServerOptions,
-  clientOptions: LanguageClientOptions
-) {
-  return new LanguageClient(
-    "prisma",
-    "Prisma Language Server",
-    serverOptions,
-    clientOptions
-  );
+function createLanguageServer(serverOptions: ServerOptions, clientOptions: LanguageClientOptions) {
+  return new LanguageClient('prisma', 'Prisma Language Server', serverOptions, clientOptions);
 }
 
 export async function activate(context: ExtensionContext): Promise<void> {
-  const serverModule = require.resolve("@prisma/language-server/dist/bin");
+  const serverModule = require.resolve('@prisma/language-server/dist/bin');
 
   // The debug options for the server
   // --inspect=6009: runs the server in Node's Inspector mode so VS Code can attach to the server for debugging
   const debugOptions = {
-    execArgv: ["--nolazy", "--inspect=6009"],
+    execArgv: ['--nolazy', '--inspect=6009'],
     env: { DEBUG: true },
   };
 
@@ -46,7 +39,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
   // Options to control the language client
   const clientOptions: LanguageClientOptions = {
     // Register the server for prisma documents
-    documentSelector: [{ scheme: "file", language: "prisma" }],
+    documentSelector: [{ scheme: 'file', language: 'prisma' }],
   };
 
   // Create the language client
@@ -58,12 +51,13 @@ export async function activate(context: ExtensionContext): Promise<void> {
   context.subscriptions.push(disposable);
 
   context.subscriptions.push(
-    commands.registerCommand("coc-prisma.restartLanguageServer", async () => {
+    services.registLanguageClient(client),
+    commands.registerCommand('coc-prisma.restartLanguageServer', async () => {
       await client.stop();
       client = createLanguageServer(serverOptions, clientOptions);
       context.subscriptions.push(client.start());
       await client.onReady();
-      window.showInformationMessage("Prisma language server restarted.");
+      window.showInformationMessage('Prisma language server restarted.');
     })
   );
 }
